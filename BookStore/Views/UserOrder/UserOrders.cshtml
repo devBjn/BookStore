@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Order>
+@{
+}
+<div style="width:85%; padding: 7rem 0" class="m-auto">
+    <a href="/" class="btn btn-dark my-2">Back</a>
+
+    <h2 class="text-center">My Orders</h2>
+    @if (Model != null && Model.Count() > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Order Date</th>
+                    <th>Order Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var (order, index) in Model.Select((value, i) => (value, i)))
+                {
+                    <tr>
+                        <td>@(index + 1)</td>
+                        <td>@order.CreateData.ToString("dd-MM-yyyy")</td>
+                        <td>@order.OrderStatus.StatusName</td>
+                    </tr>
+                    @if (order.OrderDetail != null && order.OrderDetail.Count > 0)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>
+                                <table class="table">
+                                    <tr>
+                                        <td>
+                                            Total:
+                                        </td>
+                                        <td>
+                                            @((order.OrderDetail.Select(item => item.Book.BookPrice * item.Quantity).Sum()).ToString("#,##0"))<span>.000 VND</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Book</th>
+                                        <th>Image</th>
+                                        <th>Category</th>
+                                        <th>Unit Price</th>
+                                        <th>Total Price</th>
+                                    </tr>
+                                    @foreach (var item in order.OrderDetail)
+                                    {
+                                        <tr>
+                                            <td>@item.Book.BookName</td>
+                                            <td>
+                                                @if (string.IsNullOrEmpty(item.Book.BookImage))
+                                                {
+                                                    <img src="/assets/img/banner1.jpg" style="width:80px;height:100px" />
+                                                }
+                                                else
+                                                {
+                                                    <img src=@item.Book.BookImage style="width:80px;height:100px;border-radius: 10px" />
+                                                }
+                                            </td>
+                                            <td>@item.Book.BookCategory.CategoryName</td>
+                                            <td>@item.Book.BookPrice<span>.000 VND</span> X @item.Quantity</td>
+                                            <td>
+                                                @((item.Book.BookPrice * item.Quantity).ToString("#,##0"))<span>.000 VND</span>
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <h5>No orders</h5>
+    }
+</div>
+
+

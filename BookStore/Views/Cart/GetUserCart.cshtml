@@ -1,0 +1,101 @@
+﻿@model ShoppingCart
+<div class="m-auto" style="padding: 9rem 0; width: 85%">
+    @if (Model != null && Model.CartDetails != null && Model.CartDetails.Count > 0)
+    {
+        <h2 class="text-center">My Cart</h2>
+
+        <table class="table mt-2">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Book</th>
+                    <th>Image</th>
+                    <th>Category</th>
+                    <th>Unit Price</th>
+                    <th>Total Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var (item, index) in Model.CartDetails.Select((value, i) => (value,i)))
+                    {
+                        <tr>
+                            <td>@(index + 1)</td>
+                            <td>
+                                @item.Book.BookName
+                            </td>
+
+                            @if (string.IsNullOrEmpty(item.Book.BookImage))
+                            {
+                                <td>
+                                    <img style="width: 45%; border-radius: 15px" src="/assets/img/banner1.jpg" alt="product" />
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <img style="width: 45%; border-radius: 15px" src=@item.Book.BookImage alt="product" />
+                                </td>
+                            }
+
+                            <td>
+                                @item.Book.BookCategory.CategoryName
+                            </td>
+
+                            <td>
+                                @item.Book.BookPrice<span>.000 VND</span> X @item.Quantity
+                            </td>
+
+                            <td>
+                                @((item.Book.BookPrice * item.Quantity).ToString("#,##0"))<span>.000 VND</span>
+                            </td>
+                            <td>
+                                <a class="btn btn-secondary"
+                                   asp-action="AddItem"
+                                   asp-controller="Cart"
+                                   asp-route-bookId="@item.BookId"
+                                   asp-route-redirect="1">+</a>
+                                <a class="btn btn-secondary" asp-action="RemoveItem" asp-controller="Cart" asp-route-bookId="@item.BookId">-</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+        <div class="my-2 d-flex align-items-center justify-content-end" style="gap: 15px">
+            <h4>Total:</h4>
+            @if (Model != null)
+            {
+               <h4>
+                   @((Model.CartDetails.Select(item => item.Quantity * item.Book.BookPrice).Sum()).ToString("#,##0"))<span>.000 VND</span>
+               </h4> 
+            }
+        </div>
+
+        <div class="my-2 text-end">
+            <a class="btn btn-success" asp-action="DoCheckOut" asp-controller="Cart" onclick="getPayment()">Payment</a>
+        </div>
+    }
+    else
+    {
+        <h2 class="text-center">Cart is empty</h2>
+    }
+
+</div>
+
+@section Scripts{
+    <script>
+        function getPayment() {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your cart has been purchased',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    </script>
+ }

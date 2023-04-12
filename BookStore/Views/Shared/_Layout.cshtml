@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BookStore</title>
+
+
+    @*Google Font*@
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;700&family=Roboto:wght@300;400;500;700&display=swap"
+          rel="stylesheet">
+
+    @*Bootstrap*@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    @*Owl Carousel*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    @*Font Awesome*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    @*Animate Css*@
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    @*My Css*@
+
+    <link rel="stylesheet" href="~/assets/css/style.css" asp-append-version="true" />
+</head>
+<body>
+    <header id="header">
+        <div class="d-flex justify-content-between align-items-center container">
+            <div class="header__brand">
+                <a href="/" class="header__brand__logo d-flex align-items-center">
+                    <img class="header__logo" src="/assets/img/logo.png" />
+                </a>
+            </div>
+            <div class="header__contact">
+                <ul class="d-flex flex-row mb-0">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="/#about__us">About Us</a>
+                    </li>
+                    <li>
+                        <a href="/#product">Books</a>
+                    </li>
+                    <li>
+                        <a href="/#footer">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                @*<a href="/Identity/Account/Login" class="btn btn-primary">Log in</a>
+                    <a href="/Identity/Account/Register" class="btn btn-primary">Register</a>*@
+                <partial name="_LoginPartial.cshtml" />
+            </div>
+        </div>
+    </header>
+
+    <main role="main" class="container">
+        @RenderBody()
+    </main>
+
+
+    <footer id="footer" class="border-top footer text-muted">
+        <div class="container">
+            <div class="footer__list">
+                <div class="wow animate__animated animate__fadeIn animate__delay-0s animate__slow list__item__footer">
+                    <div class="logo__footer">
+                        <a class="logo__footer__brand">
+                            <img style="width:100%" src="/assets/img/logo.png" alt="">
+                        </a>
+                    </div>
+                    <div class="logo__footer__list">
+                        <ul>
+                            <li class="first">
+                                <i class="fas fa-phone footer__icon"></i>
+                                <span>
+                                    1900-1588-0000
+                                    <br>
+                                    +84 354023754
+                                </span>
+                            </li>
+                            <li class="first">
+                                <i class="fas fa-envelope footer__icon"></i>
+                                <span>
+                                    bookstore@example.com
+                                    <br>
+                                    bookshop@gmail.com
+                                </span>
+                            </li>
+                            <li class="first">
+                                <i class="fas fa-map-marker-alt footer__icon"></i>
+                                <span>
+                                    Luong Minh Nguyen, Ho Chi Minh City
+                                    <br>
+                                    Tan Phu, Vietnam
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="wow animate__animated animate__fadeIn animate__delay-1s animate__slow list__item__footer">
+                    <div class="logo__title">
+                        <h3>Our links</h3>
+                    </div>
+                    <div class="logo__footer__list">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span>
+                                        Home
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span>
+                                        About Us
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span>
+                                        Product
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span>
+                                        Contact
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="wow animate__animated animate__fadeIn animate__delay-2s animate__slow list__item__footer" style="margin-top: 28px">
+                    <div class="logo__title">
+                        <h3>Categories</h3>
+                    </div>
+                    <div class="logo__footer__list">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span>
+                                        Thriller
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span>Horror</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span>Romance</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span>Historical</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span>Novel</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="wow animate__animated animate__fadeIn animate__delay-3s animate__slow list__item__footer" style="margin-top: 28px">
+                    <div class="logo__title">
+                        <h3>Other links</h3>
+                    </div>
+                    <div class="logo__footer__list">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span>FAQ</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span>Portfolio</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span>Privacy Policy</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span>Terms & Conditions</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span>Support</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Back to top button -->
+    <a id="button"></a>
+    @*jQuery*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    @*Owl Carousel*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    @*Sweet alert 2*@
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @*My js*@
+    <script type="text/javascript">$('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            autoplay: true,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                600: {
+                    items: 1,
+                },
+                1000: {
+                    items: 3,
+                }
+            }
+        })</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>new WOW().init();</script>
+
+    <script src="~/assets/js/main.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

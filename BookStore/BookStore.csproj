@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+  <ItemGroup>
+    <Content Remove="wwwroot\assets\" />
+    <Content Remove="wwwroot\assets\css\" />
+    <Content Remove="wwwroot\assets\img\" />
+    <Content Remove="wwwroot\assets\js\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\" />
+    <Folder Include="wwwroot\assets\css\" />
+    <Folder Include="wwwroot\assets\img\" />
+    <Folder Include="wwwroot\assets\js\" />
+    <Folder Include="Views\Book\" />
+    <Folder Include="Constants\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Models\DTOs\" />
+    <Folder Include="Views\Cart\" />
+    <Folder Include="Views\UserOrder\" />
+    <Folder Include="Views\UserOrder\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\Book\" />
+    <None Remove="Constants\" />
+    <None Remove="Repositories\" />
+    <None Remove="Models\DTOs\" />
+    <None Remove="Views\Cart\" />
+    <None Remove="Views\UserOrder\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.4">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.4">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+</Project>

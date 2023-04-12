@@ -1,0 +1,102 @@
+﻿@model BookDisplayModel
+
+
+<div id="product" class="product" style="padding-top: 6rem">
+    <div class="container">
+        <div class="wow animate__animated animate__fadeIn about__us__title ">
+            <h2>Books</h2>
+            <hr style="width: 80%; margin: 0 auto; color: #F0122D ; height: 2px;" />
+        </div>
+        <div class="wow animate__animated animate__fadeIn row" style="padding: 3rem 0">
+            <div class="my-2">
+                <form asp-controller="Book" asp-action="DisplayBooks" class="row row-cols-lg-auto g-3 align-items-center">
+                    <div class="col-12">
+                        <label class="visually-hidden" for="categoryId">Category</label>
+                        <select class="form-select" id="categoryId" name="categoryId">
+                            <option selected>Category</option>
+                            @foreach (var category in Model.BookCategories)
+                            {
+                                <option selected="@(category.CategoryId == Model.CategoryId)" value=@category.CategoryId>@category.CategoryName</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="visually-hidden" for="searchTerm">Search by title</label>
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                            <input type="text" class="form-control" value="@Model.SearchTerm" id="searchTerm" name="searchTerm" placeholder="Search by title">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-success">Search</button>
+                        <a href="/Book/DisplayBooks" class="btn btn-dark">Reset</a>
+                    </div>
+                </form>
+            </div>
+            @if (Model != null)
+            {
+                @foreach (var book in Model.Books)
+                {
+                    <div class="col-12 col-md-4">
+                        <a asp-action="DetailBook" asp-controller="Book" asp-route-id="@book.Id">
+                            <div class="wsk-cp-product">
+                                <div class="wsk-cp-img">
+                                    @if (string.IsNullOrEmpty(book.BookImage))
+                                    {
+                                        <img src="/assets/img/banner1.jpg" alt="Product" class="img-responsive" />
+                                    }
+                                    else
+                                    {
+                                        <img src=@book.BookImage alt="Product" class="img-  responsive" />
+
+                                    }
+                                </div>
+                                <div class="wsk-cp-text">
+                                    <div class="category">
+                                        <span>@book.Author <b>||</b> @book.CategoryName</span>
+                                    </div>
+                                    <div class="title-product">
+                                        <h3>@book.BookName</h3>
+                                    </div>
+                                    <div class="description-prod">
+                                        <p>@book.BookDescription</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="wcf-left"><span class="price">@book.BookPrice<span>.000 VND</span></span></div>
+                                        <div class="wcf-right"><a onclick="add(@book.Id)" class="buy-btn"><i class="fa-solid fa-cart-shopping"></i></a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+        </div>
+
+    </div>
+</div>
+
+@section Scripts{
+    <script>async function add(bookId) {
+    var usernameEl = document.getElementById("username");
+    console.log(123);
+            if (usernameEl == null) {
+                window.location.href = "/Identity/Account/Login";
+            }
+            try {
+                var response = await fetch(`/Cart/AddItem?bookId=${bookId}`);
+                if (response.status == 200) {
+                    var result = await response.json();
+                    var cartCountEl = document.getElementById("cartCount");
+                    cartCountEl.innerHTML = result;
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }</script>
+}

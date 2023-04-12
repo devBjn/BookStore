@@ -1,0 +1,136 @@
+﻿@model IEnumerable<Book>
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@*Carousel*@
+<div class="wow animate__animated animate__fadeIn carousel">
+    <div class="container">
+        <div class="owl-carousel owl-theme">
+            <div>
+                <img src="/assets/img/banner1.jpg" />
+            </div>
+            <div>
+                <img src="/assets/img/banner2.jpg" />
+            </div>
+            <div>
+                <img src="/assets/img/banner3.jpg" />
+            </div>
+            <div>
+                <img src="/assets/img/banner4.jpg" />
+            </div>
+            <div>
+                <img src="/assets/img/banner5.jpg" />
+            </div>
+        </div>
+    </div>
+</div>
+@*End Carousel*@
+
+@*About Us*@
+<div id="about__us" class="about__us">
+    <div class="container">
+        <div class="wow animate__animated animate__bounceIn about__us__title ">
+            <h2>About Us</h2>
+            <hr style="width: 80%; margin: 0 auto; color: #F0122D ; height: 2px;" />
+        </div>
+        <div class=" row mt-5 ">
+            <div class="col-12 col-md-4 wow animate__animated animate__fadeInLeft animate__delay-0s animate__slow">
+                <div class="about__us__image">
+                    <img src="/assets/img/aboutUs.png" />
+                </div>
+            </div>
+            <div class="col-12 col-md-8 wow animate__animated animate__fadeInRight animate__delay-1s animate__slow">
+                <div class="about__us__information">
+                    <p>
+                        Since its fuse in 2005, Company Name has cut a specialty for itself in the youngsters’ books section of the distributing business. We have some expertise in books implied for offspring of various ages.
+
+                        The wide scope of books offered by us incorporates fantasies, moral stories, showed storybooks, reference books, general learning books, sentence structure books, shading books, action books, sticker books, and more. Every one of these books is accessible in both English and Hindi.
+                    </p>
+                    <p>
+                        Our point is to give significant, charming, and animating substance to youngsters who go much past their normal course books. With this point of view, we treat each book as a work of adoration. Every one of our books is broadly examined, attentively composed, and delightfully planned.
+
+                        Development and experimentation are indispensable to our methodology toward books. Our broad gathering of books– picture books, sticker books, story and sticker books, 3D Books, spring-up books, innovative idea books, curiosity books, topic-based books, movement books, and so on – are a declaration of this methodology. This encourages us to make energizing and testing items for youngsters.
+                    </p>
+                    <p>
+                        We earnestly trust that books can be an extraordinary wellspring of motivation with the ability to impact and shape youthful personalities.
+
+                        Our books do not simply go for building up the scholarly capacities of youngsters; rather, they are made with the aim of contributing towards their all-encompassing improvement.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Product*@
+<div id="product" class="product">
+    <div class="container">
+        <div class="wow animate__animated animate__fadeIn about__us__title ">
+            <h2>Books</h2>
+            <hr style="width: 80%; margin: 0 auto; color: #F0122D ; height: 2px;" />
+        </div>
+        <div class="wow animate__animated animate__fadeIn row" style="padding: 3rem 0">
+            @if (Model != null)
+            {
+                @foreach (var book in Model.Skip(0).Take(6))
+                {
+                    <div class="col-12 col-md-4">
+                        <a asp-action="DetailBook" asp-controller="Book" asp-route-id="@book.Id">
+                            <div class="wsk-cp-product">
+                                <div class="wsk-cp-img">
+                                    <img src=@book.BookImage alt="Product" class="img-responsive" />
+                                </div>
+                                <div class="wsk-cp-text">
+                                    <div class="category">
+                                        <span>@book.Author <b>||</b> @book.CategoryName</span>
+                                    </div>
+                                    <div class="title-product">
+                                        <h3>@book.BookName</h3>
+                                    </div>
+                                    <div class="description-prod">
+                                        <p>@book.BookDescription</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="wcf-left"><span class="price">@book.BookPrice<span>.000 VND</span></span></div>
+                                        <div class="wcf-right">
+                                            <a onclick="add(@book.Id)">
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+        </div>
+        <div class="text-center">
+            <a asp-action="DisplayBooks" asp-controller="Book" class="btn btn-primary btn__auth">See all products</a>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>async function add(bookId) {
+            var usernameEl = document.getElementById("username");
+            if (usernameEl == null) {
+                window.location.href = "/Identity/Account/Login";
+            }
+            try {
+                var response = await fetch(`/Cart/AddItem?bookId=${bookId}`);
+                if (response.status == 200) {
+                    var result = await response.json();
+                    var cartCountEl = document.getElementById("cartCount");
+                    cartCountEl.innerHTML = result;
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }</script>
+}
