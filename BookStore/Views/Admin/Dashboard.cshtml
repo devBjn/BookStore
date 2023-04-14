@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Book>
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container" style="padding: 7.5rem 0">
+    <div class="text-center">
+        <h1>Dashboard</h1>
+    </div>
+    <div class="content">
+        <a class="btn btn-success" asp-action="AddBook" asp-controller="Admin">Add a new book</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Author</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var (book, index) in Model.Select((value, i) => (value, i)))
+                {
+                    <tr>
+                        <td>@(index + 1)</td>
+                        <td>@book.BookName</td>
+                        <td>@book.CategoryName</td>
+                        <td>@book.Author</td>
+                        <td>
+                            <img style="width:80px;height:100px;border-radius: 10px" src="@book.BookImage" alt="item" />
+                        </td>
+                        <td>@(book.BookPrice.ToString("#,##0"))<span>.000 VND</span></td>
+                        <td>
+                            <a class="btn btn-warning" asp-action="EditBook" asp-controller="Admin" asp-route-id=@book.Id>Edit</a>
+                            <a asp-action="RemoveBook" asp-controller="Admin" asp-route-id=@book.Id class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+

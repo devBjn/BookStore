@@ -6,10 +6,21 @@
 
 <ul class="navbar-nav d-flex flex-row align-items-center" style="gap: 10px">
     <li class="nav-item" id="cartIcon">
-        <a class="nav-link d-flex align-items-center" asp-action="GetUserCart" asp-controller="Cart" style="gap: 4px">
-            <span id="cartCount" class="badge count__item">0</span>
-            <i class="fa-solid fa-cart-shopping cart__icon"></i>
-        </a>
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="nav-link d-flex align-items-center" asp-action="GetUserCart" asp-controller="Cart" style="gap: 4px; display: none !important">
+                <span id="cartCount" class="badge count__item">0</span>
+                <i class="fa-solid fa-cart-shopping cart__icon"></i>
+            </a>
+        }
+        else
+        {
+            <a class="nav-link d-flex align-items-center" asp-action="GetUserCart" asp-controller="Cart" style="gap: 4px">
+                <span id="cartCount" class="badge count__item">0</span>
+                <i class="fa-solid fa-cart-shopping cart__icon"></i>
+            </a>
+        }
+
     </li>
     @if (SignInManager.IsSignedIn(User))
     {

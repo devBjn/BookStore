@@ -1,4 +1,8 @@
 ﻿@model ShoppingCart
+
+@{
+    ViewData["Title"] = "Cart Page";
+}
 <div class="m-auto" style="padding: 9rem 0; width: 85%">
     @if (Model != null && Model.CartDetails != null && Model.CartDetails.Count > 0)
     {
@@ -19,7 +23,7 @@
             <tbody>
                 @if (Model != null)
                 {
-                    @foreach (var (item, index) in Model.CartDetails.Select((value, i) => (value,i)))
+                    @foreach (var (item, index) in Model.CartDetails.Select((value, i) => (value, i)))
                     {
                         <tr>
                             <td>@(index + 1)</td>
@@ -69,9 +73,9 @@
             <h4>Total:</h4>
             @if (Model != null)
             {
-               <h4>
-                   @((Model.CartDetails.Select(item => item.Quantity * item.Book.BookPrice).Sum()).ToString("#,##0"))<span>.000 VND</span>
-               </h4> 
+                <h4>
+                    @((Model.CartDetails.Select(item => item.Quantity * item.Book.BookPrice).Sum()).ToString("#,##0"))<span>.000 VND</span>
+                </h4>
             }
         </div>
 
@@ -87,8 +91,7 @@
 </div>
 
 @section Scripts{
-    <script>
-        function getPayment() {
+    <script>function getPayment() {
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -96,6 +99,5 @@
                 showConfirmButton: false,
                 timer: 1500
             })
-        }
-    </script>
- }
+        }</script>
+}

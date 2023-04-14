@@ -26,6 +26,7 @@
     <Folder Include="Views\Cart\" />
     <Folder Include="Views\UserOrder\" />
     <Folder Include="Views\UserOrder\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\Book\" />
@@ -34,6 +35,7 @@
     <None Remove="Models\DTOs\" />
     <None Remove="Views\Cart\" />
     <None Remove="Views\UserOrder\" />
+    <None Remove="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.4" />

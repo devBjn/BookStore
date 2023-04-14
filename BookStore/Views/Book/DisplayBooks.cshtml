@@ -1,6 +1,10 @@
 ﻿@model BookDisplayModel
 
 
+@{
+    ViewData["Title"] = "Product Page";
+}
+
 <div id="product" class="product" style="padding-top: 6rem">
     <div class="container">
         <div class="wow animate__animated animate__fadeIn about__us__title ">
@@ -82,8 +86,8 @@
 
 @section Scripts{
     <script>async function add(bookId) {
-    var usernameEl = document.getElementById("username");
-    console.log(123);
+            var usernameEl = document.getElementById("username");
+            console.log(123);
             if (usernameEl == null) {
                 window.location.href = "/Identity/Account/Login";
             }

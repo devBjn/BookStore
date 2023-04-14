@@ -35,25 +35,48 @@
                     <img class="header__logo" src="/assets/img/logo.png" />
                 </a>
             </div>
+           
             <div class="header__contact">
                 <ul class="d-flex flex-row mb-0">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-                    <li>
-                        <a href="/#about__us">About Us</a>
-                    </li>
-                    <li>
-                        <a href="/#product">Books</a>
-                    </li>
-                    <li>
-                        <a href="/#footer">Contact</a>
-                    </li>
+                    @{ if (User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a href="/">Home</a>
+                            </li>
+                            <li>
+                                <a href="/#about__us">About Us</a>
+                            </li>
+                            <li>
+                                <a href="/#product">Books</a>
+                            </li>
+                            <li>
+                                <a href="/#footer">Contact</a>
+                            </li>
+                            <li>
+                                <a asp-action="Dashboard" asp-controller="Admin">Admin</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="/">Home</a>
+                            </li>
+                            <li>
+                                <a href="/#about__us">About Us</a>
+                            </li>
+                            <li>
+                                <a href="/#product">Books</a>
+                            </li>
+                            <li>
+                                <a href="/#footer">Contact</a>
+                            </li>
+                        }
+                    }
                 </ul>
             </div>
             <div>
                 @*<a href="/Identity/Account/Login" class="btn btn-primary">Log in</a>
-                    <a href="/Identity/Account/Register" class="btn btn-primary">Register</a>*@
+            <a href="/Identity/Account/Register" class="btn btn-primary">Register</a>*@
                 <partial name="_LoginPartial.cshtml" />
             </div>
         </div>

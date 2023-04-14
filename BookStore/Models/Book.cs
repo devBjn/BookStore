@@ -15,7 +15,8 @@ namespace BookStore.Models
 		public string BookName { get; set; }
 
 		[Required]
-		public double BookPrice { get; set; }
+        [Range(0, double.MaxValue, ErrorMessage = "Please enter a valid price")]
+        public double BookPrice { get; set; }
 
         [Required]
         public string BookDescription { get; set; }
@@ -24,7 +25,10 @@ namespace BookStore.Models
 		public string Author { get; set; }
 
 		[Required]
-		public string BookImage { get; set; }
+        [DataType(DataType.ImageUrl)]
+        [RegularExpression(@"(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)",
+ErrorMessage = "Please enter a valid image URL (JPG, GIF, or PNG)")]
+        public string BookImage { get; set; }
 
 		public int? CategoryId { get; set; }
 		[ForeignKey("CategoryId")]

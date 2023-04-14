@@ -1,0 +1,59 @@
+﻿@model BookStore.Models.Book;
+
+
+@{
+    ViewData["Title"] = "Add Book";
+}
+
+
+<div class="form m-auto" style="padding: 7rem 0; width: 70%">
+    <h1 class="text-center">Add Book</h1>
+    <div>
+        <form asp-action="AddBook">
+            <div class="mb-3">
+                <label asp-for="BookName" class="form-label">Book Name</label>
+                <input asp-for="BookName" type="text" class="form-control">
+                <span class="text-danger" asp-validation-for="BookName"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="CategoryId" class="form-label">Book Category</label>
+                <select asp-for="CategoryId" class="form-control">
+                    <option value="5" selected>Novel</option>
+                    <option value="6">Horror</option>
+                    <option value="7">Historical</option>
+                    <option value="8">Thriller</option>
+                </select>
+                <span class="text-danger" asp-validation-for="CategoryId"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Author" class="form-label">Author</label>
+                <input asp-for="Author" type="text" class="form-control">
+                <span class="text-danger" asp-validation-for="Author"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="BookImage" class="form-label">BookImage</label>
+                <input asp-for="BookImage" type="text" class="form-control">
+                <span class="text-danger" asp-validation-for="BookImage"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="BookPrice" class="form-label">Book Price</label>
+                <input asp-for="BookPrice" type="number" class="form-control">
+                <span class="text-danger" asp-validation-for="BookPrice"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="BookDescription" class="form-label">Book Description</label>
+                <input asp-for="BookDescription" type="text" class="form-control">
+                <span class="text-danger" asp-validation-for="BookDescription"></span>
+            </div>
+
+            @if (TempData["msg"] != null)
+            {
+                <div class="mb-3">
+                    <span class="text-successfull">@TempData["msg"]</span>
+                </div>
+            }
+
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+</div>
